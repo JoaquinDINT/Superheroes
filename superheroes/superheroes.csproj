@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Convertidores\BoolToVisibleConverter.cs" />
     <Compile Include="Convertidores\FondoConverter.cs" />
+    <Compile Include="MainWindowVM.cs" />
     <Compile Include="Superheroe.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

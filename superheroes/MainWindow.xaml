@@ -15,22 +15,22 @@
         <convertidores:BoolToVisibleConverter x:Key="BoolToVisibleConversor" />
     </Window.Resources>
     <Border x:Name="principalBorder"
-        Background="{Binding Path = Heroe,
+        Background="{Binding Path = SuperheroeActual.Heroe,
                          Converter = {StaticResource FondoConversor}}">
     <DockPanel LastChildFill="True"
                Margin="10,5,10,5">
         <DockPanel DockPanel.Dock="Top"
                    LastChildFill="False">
             <TextBlock DockPanel.Dock="Left"
-                       Text="{Binding Path = Nombre}" />
+                           Text="{Binding Path = SuperheroeActual.Nombre}" />
                 <WrapPanel DockPanel.Dock="Right"
                            >
                     <Image Source="assets/avengers.png"
-                           Visibility="{Binding Path = Vengador,
+                           Visibility="{Binding Path = SuperheroeActual.Vengador,
                                         Converter = {StaticResource BoolToVisibleConversor}}"
                            Height="40"/>
                     <Image Source="assets/xmen.png"
-                           Visibility="{Binding Path = Xmen,
+                           Visibility="{Binding Path = SuperheroeActual.Xmen,
                                         Converter = {StaticResource BoolToVisibleConversor}}"
                            Height="40" />
                 </WrapPanel>
@@ -42,7 +42,7 @@
                    Height="25"
                        MouseLeftButtonDown="MenosClick" />
             <TextBlock x:Name="PosicionTextBlock"
-                       Text="1/3"
+                       Text="{Binding Path=ContadorActual}"
                        FontSize="14"
                        FontWeight="Bold" />
             <Image Source="assets/arrow.png"
@@ -61,7 +61,7 @@
             </Image>
         </StackPanel>
 
-        <Image Source="{Binding Path = Imagen}"
+            <Image Source="{Binding Path = SuperheroeActual.Imagen}"
                Stretch="UniformToFill"/>
 
     </DockPanel>
