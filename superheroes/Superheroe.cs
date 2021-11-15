@@ -76,7 +76,7 @@ namespace superheroes
                 if (this._heroe != value)
                 {
                     _heroe = value;
-                    this.NotifyPropertyChanged("Xmen");
+                    this.NotifyPropertyChanged("Heroe");
                 }
             }
         }

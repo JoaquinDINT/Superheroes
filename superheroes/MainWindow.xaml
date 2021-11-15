@@ -8,31 +8,143 @@
         mc:Ignorable="d"
         Title="Superheroe"
         Icon="assets/shield.ico"
-        Height="450"
-        Width="800">
+        Height="700"
+        Width="1200">
+    
     <Window.Resources>
         <convertidores:FondoConverter x:Key="FondoConversor" />
         <convertidores:BoolToVisibleConverter x:Key="BoolToVisibleConversor" />
+        <Style TargetType="Image"
+               x:Key="SuperheroeImage">
+            <Setter Property="Source"
+                    Value="{Binding Path = SuperheroeActual.Imagen}" />
+            <Setter Property="Stretch"
+                    Value="UniformToFill" />
+            <Setter Property="Opacity"
+                    Value="0.5" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Opacity"
+                            Value="1" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Border"
+               x:Key="SuperheroeBorder">
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="BorderBrush"
+                    Value="MidnightBlue" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="BorderThickness"
+                            Value="3" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Border"
+               x:Key="PrincipalBorderStyle">
+            <Setter Property="Background"
+                    Value="IndianRed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path= SuperheroeActual.Heroe}"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="PaleGreen" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="TextBlock"
+               x:Key="NombreStyle">
+            <Setter Property="Text"
+                    Value="{Binding Path = SuperheroeActual.Nombre}" />
+            <Setter Property="FontSize"
+                    Value="24" />
+            <Setter Property="Foreground"
+                    Value="AntiqueWhite" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="FontSize"
+                                             To="96"
+                                             Duration="0:0:1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="FontSize"
+                                             To="24"
+                                             Duration="0:0:1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Image"
+               x:Key="VengadoresImageStyle">
+            <Setter Property="Height"
+                    Value="40"/>
+            <Setter Property="Source"
+                    Value="assets/avengers.png" />
+            <Setter Property="Visibility"
+                    Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path = SuperheroeActual.Vengador}"
+                             Value="True">
+                    <Setter Property="Visibility"
+                            Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Image"
+               x:Key="XmenImageStyle">
+            <Setter Property="Height"
+                    Value="40" />
+            <Setter Property="Source"
+                    Value="assets/xmen.png" />
+            <Setter Property="Visibility"
+                    Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path = SuperheroeActual.Xmen}"
+                             Value="True">
+                    <Setter Property="Visibility"
+                            Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
     </Window.Resources>
-    <Border x:Name="principalBorder"
-        Background="{Binding Path = SuperheroeActual.Heroe,
-                         Converter = {StaticResource FondoConversor}}">
+    
+    <Border x:Name="PrincipalBorder"
+            Style="{StaticResource PrincipalBorderStyle}">
+        
     <DockPanel LastChildFill="True"
                Margin="10,5,10,5">
+        
         <DockPanel DockPanel.Dock="Top"
                    LastChildFill="False">
+            
             <TextBlock DockPanel.Dock="Left"
-                           Text="{Binding Path = SuperheroeActual.Nombre}" />
+                           x:Name="TituloTextBlok"
+                           Style="{StaticResource NombreStyle}" />
+            
                 <WrapPanel DockPanel.Dock="Right"
                            >
-                    <Image Source="assets/avengers.png"
-                           Visibility="{Binding Path = SuperheroeActual.Vengador,
-                                        Converter = {StaticResource BoolToVisibleConversor}}"
-                           Height="40"/>
-                    <Image Source="assets/xmen.png"
-                           Visibility="{Binding Path = SuperheroeActual.Xmen,
-                                        Converter = {StaticResource BoolToVisibleConversor}}"
-                           Height="40" />
+                    <Image Style="{StaticResource VengadoresImageStyle}" />
+                    <Image Style="{StaticResource XmenImageStyle}" />
                 </WrapPanel>
         </DockPanel>
         <StackPanel DockPanel.Dock="Bottom"
@@ -60,10 +172,9 @@
                 </Image.RenderTransform>
             </Image>
         </StackPanel>
-
-            <Image Source="{Binding Path = SuperheroeActual.Imagen}"
-               Stretch="UniformToFill"/>
-
-    </DockPanel>
+            <Border Style="{StaticResource SuperheroeBorder}">
+                <Image Style="{StaticResource SuperheroeImage}" />
+            </Border>
+        </DockPanel>
     </Border>
 </Window>

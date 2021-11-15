@@ -43,7 +43,7 @@ namespace superheroes
 
 
         private int contador = 0;
-        private List<Superheroe> listaHeroes;
+        private readonly List<Superheroe> listaHeroes;
 
 
         public MainWindowVM()
